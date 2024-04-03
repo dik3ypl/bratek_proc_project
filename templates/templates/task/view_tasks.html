@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Tasks</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .task-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .task-tile {
+            width: 200px;
+            height: 200px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .submitted {
+            color: green;
+        }
+        .not-submitted {
+            color: red;
+        }
+        .add-task-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+{% include 'navigation.html' %}
+    <h1>Available Tasks</h1>
+    <div class="task-container">
+        {% for task in tasks %}
+        <div class="task-tile">
+            <p>{{ task.title }}</p>
+            {% if task.id in user_solutions_dict.keys %}
+                <p class="submitted">- You've already submitted a solution</p>
+            {% else %}
+                <p class="not-submitted">- You haven't submitted a solution yet</p>
+            {% endif %}
+            <a href="{% url 'submit_solution' task_id=task.id %}" class="add-task-btn">Add Solution</a>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

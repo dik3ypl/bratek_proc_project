@@ -55,7 +55,7 @@ ROOT_URLCONF = 'common.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
+        'DIRS': [BASE_DIR / 'templates', 'templates/templates']
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -75,14 +75,20 @@ WSGI_APPLICATION = 'common.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'michalp1',
+#         'USER': 'michalp1',
+#         'PASSWORD': 'afsHL0N919gpLbbc',
+#         'HOST': 'mysql.agh.edu.pl',
+#         'PORT': '3306',
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'michalp1',
-        'USER': 'michalp1',
-        'PASSWORD': 'afsHL0N919gpLbbc',
-        'HOST': 'mysql.agh.edu.pl',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'database',
     }
 }
 
@@ -131,3 +137,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Authentication
 
 AUTH_USER_MODEL = 'app.User'
+
+LOGIN_URL = 'login/'

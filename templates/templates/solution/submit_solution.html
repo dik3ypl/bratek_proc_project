@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Solution</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .solution-container {
+            display: flex;
+            gap: 20px;
+            border: 1px solid #ccc; /* Ramka wokół kontenera */
+            border-radius: 5px;
+            overflow: hidden; /* Zapobiega przekraczaniu ramki przez zawartość */
+        }
+        .add-task, .previous-solutions {
+            padding: 20px;
+            flex: 1;
+        }
+        .add-task {
+            border-right: 1px solid #ccc; /* Ramka po prawej stronie formularza */
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: vertical;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .error-message {
+            color: red;
+        }
+        .previous-solutions ul {
+            list-style: none;
+            padding: 0;
+        }
+        .previous-solutions h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .test-results li {
+            margin-bottom: 5px;
+        }
+        .pass {
+            color: green;
+        }
+        .fail {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    {% include 'navigation.html' %}
+    <h1>Submit Solution to {{ task }}</h1>
+    <h4>{{ task.description }}</h4>
+    <div class="solution-container">
+        <div class="add-task">
+            <h2>Add New Solution</h2>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="hidden" name="task" value="{{ task_id }}">
+                <input type="hidden" name="user" value="{{ request.user.id }}">
+                <label for="id_solution_file">Solution File:</label>
+                {{ form.solution_file }}
+                {% if form.errors %}
+                <div class="error-message">
+                    {% for field, errors in form.errors.items %}
+                        {% for error in errors %}
+                            {{ error }}
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+        <div class="previous-solutions">
+            <h2>Previous Solutions</h2>
+            <ul>
+                {% for solution in previous_solutions %}
+                    <li>
+                        <h3>{{ forloop.counter }}</h3>
+                        <ul class="test-results">
+                            {% for test_id, result in solution.test_results.items %}
+                                <li>
+                                    Test {{ test_id }}:
+                                    <span class="{% if result.result == 'Pass' %}pass{% else %}fail{% endif %}">
+                                        {{ result.result }}
+                                    </span>,
+                                    Execution Time: {{ result.execution_time }} seconds
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
