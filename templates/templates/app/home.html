@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sprawdzarka Kodu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .user-info {
+            margin-bottom: 20px;
+            text-align: right;
+        }
+
+        .user-info span {
+            font-weight: bold;
+        }
+
+        .auth-form {
+            margin-top: 20px;
+        }
+
+        .auth-form input[type="text"],
+        .auth-form input[type="password"],
+        .auth-form input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .auth-form button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            border: none;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .auth-form button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sprawdzarka Kodu</h1>
+        <div class="user-info">
+            {% if user.is_authenticated %}
+                <span>Zalogowany jako: {{ user.email }}</span> | <a href="{% url 'logout' %}">Wyloguj</a>
+                <div style="margin-top: 20px;">
+                    <a href="/tasks/" style="text-decoration: none;">
+                        <button style="padding: 15px 30px; background-color: #007bff; color: #fff; border: none; border-radius: 5px; font-size: 18px; cursor: pointer;">
+                            <span style="font-size: 18px;">Start</span>
+                        </button>
+                    </a>
+                </div>
+            {% else %}
+                <div class="auth-form">
+                    <form method="post" action="{% url 'login' %}">
+                        {% csrf_token %}
+                        <input type="email" name="email" placeholder="Adres email" required>
+                        <input type="password" name="password" placeholder="Hasło" required>
+                        <button type="submit">Zaloguj</button>
+                    </form>
+                    <p>Nie masz jeszcze konta? <a href="{% url 'register' %}">Zarejestruj się</a>.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
