@@ -21,5 +21,6 @@ import main
 
 urlpatterns = [
     path('', include('main.urls')),
+    path('panel/', include('panel.urls')),
     path('admin/', admin.site.urls),
 ]
