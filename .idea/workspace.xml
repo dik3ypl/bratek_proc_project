@@ -4,22 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e26aeefd-a0ec-42ba-8dbb-a2276dd44066" name="Changes" comment="Add requirements.txt">
-      <change afterPath="$PROJECT_DIR$/common/helper.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/.gitkeep" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/panel/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/main/playground.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tmp/.gitkeep" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/bratek_proc_project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/bratek_proc_project.iml" afterDir="false" />
+    <list default="true" id="e26aeefd-a0ec-42ba-8dbb-a2276dd44066" name="Changes" comment="Setup /playground - test environment">
+      <change afterPath="$PROJECT_DIR$/templates/main/register.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/common/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/controllers.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/controllers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/panel/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/panel/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/panel/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main/playground.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/playground.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/.gitkeep" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/layouts/layout.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,6 +89,7 @@
       <recent name="C:\AGH\bratek_proc_project\app\managers" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\AGH\bratek_proc_project\mail" />
       <recent name="C:\AGH\bratek_proc_project\app" />
       <recent name="C:\AGH\bratek_proc_project\common" />
       <recent name="C:\AGH\bratek_proc_project\app\forms\user" />
@@ -111,6 +106,7 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.9 (bratek_proc_project)" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -150,7 +146,7 @@
       <workItem from="1713043758497" duration="2562000" />
       <workItem from="1713046660884" duration="796000" />
       <workItem from="1713110794349" duration="618000" />
-      <workItem from="1713112483661" duration="5701000" />
+      <workItem from="1713112483661" duration="11164000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Django commit">
       <option name="closed" value="true" />
@@ -168,7 +164,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710815338440</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Setup /playground - test environment">
+      <option name="closed" value="true" />
+      <created>1713123575946</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1713123575946</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -188,6 +192,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial Django commit" />
     <MESSAGE value="Add requirements.txt" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add requirements.txt" />
+    <MESSAGE value="Setup /playground - test environment" />
+    <option name="LAST_COMMIT_MESSAGE" value="Setup /playground - test environment" />
   </component>
 </project>
