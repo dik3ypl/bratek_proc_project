@@ -1,21 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Python Playground</title>
-</head>
-<body>
+{% extends 'main/layouts/layout.html' %}
+
+{% block title %}Python Playground{% endblock %}
+
+{% block content %}
 <h1>Python Playground</h1>
 <form method="post">
     {% csrf_token %}
-    <label>
-        <textarea name="code" rows="10" cols="50">print("Hello, world!")</textarea>
-    </label>
+    <label for="code">Your Python function:</label><br>
+    <textarea id="code" name="code" rows="10" cols="50" placeholder="def user_function(data):\n    return sum(data)\n"></textarea><br><br>
+
+    <label for="args">Function Arguments (comma-separated):</label><br>
+    <input type="text" id="args" name="args" placeholder="1, 2, 3"><br><br>
+
+    <label for="expected">Expected Outputs (comma-separated):</label><br>
+    <input type="text" id="expected" name="expected" placeholder="6"><br><br>
+    
+    <label for="function">Function name to test:</label><br>
+    <input type="text" id="function" name="function" placeholder="function"><br><br>
+
     <input type="submit" value="Run">
 </form>
 {% if output %}
     <h2>Output:</h2>
     <pre>{{ output }}</pre>
 {% endif %}
-</body>
-</html>
+{% endblock %}

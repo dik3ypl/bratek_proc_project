@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Site{% endblock %}</title>
+</head>
+<body>
+<header>
+    <h1>Welcome to Our Site!</h1>
+    {% if user.is_authenticated %}
+        <p>Logged in as {{ user.username }}.
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Wyloguj się</button>
+        </form>
+    {% else %}
+        <a href="{% url 'login' %}">Log In</a>
+        <a href="{% url 'register' %}">Register</a>
+    {% endif %}
+    <a href="{% url 'playground' %}">Playground</a>
+</header>
+
+{% block content %}
+    <!-- Content -->
+{% endblock %}
+
+</body>
+</html>
