@@ -15,34 +15,35 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from mail.sender import send_activation_email
 
 
-def playground(request):
-    output = None
-    if request.method == "POST":
-        user_code = request.POST.get("code", "")
-        args = request.POST.get("args", "")
-        expected = request.POST.get("expected", "")
-        function_name = request.POST.get("function", "").strip()
+def playground(form):
+    if not form.is_valid():
+        return HttpResponse("Error.")
 
-        args_list = [eval(arg.strip()) for arg in args.split(',')] if args else []
-        expected_list = [eval(exp.strip()) for exp in expected.split(',')] if expected else []
+    user_code = form.cleaned_data['code']
+    args = form.cleaned_data['args']
+    expected = form.cleaned_data['expected']
+    function = form.cleaned_data['function']
 
-        with tempfile.NamedTemporaryFile(delete=False, suffix='.py', mode='w') as script_file:
-            script_file.write(user_code)
-            script_path = script_file.name
+    args_list = [eval(arg.strip()) for arg in args.split(',')] if args else []
+    expected_list = [eval(exp.strip()) for exp in expected.split(',')] if expected else []
 
-        spec = importlib.util.spec_from_file_location("user_module", script_path)
-        user_module = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(user_module)
+    with tempfile.NamedTemporaryFile(delete=False, suffix='.py', mode='w') as script_file:
+        script_file.write(user_code)
+        script_path = script_file.name
 
-        try:
-            user_function = getattr(user_module, function_name)
-            result = user_function(*args_list)
-            output = f"Result of {function_name}: {result}"
-            if result in expected_list:
-                output += " — Result is as expected."
-            else:
-                output += " — Result differs from expected."
-        except Exception as e:
-            output = f"Error while executing user function: {str(e)}"
+    spec = importlib.util.spec_from_file_location("user_module", script_path)
+    user_module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(user_module)
 
-    return render(request, 'main/playground.html', {"output": output})
+    try:
+        user_function = getattr(user_module, function)
+        result = user_function(*args_list)
+        output = f"Result of {function}: {result}"
+        if result in expected_list:
+            output += " — Result is as expected."
+        else:
+            output += " — Result differs from expected."
+    except Exception as e:
+        output = f"Error while executing user function: {str(e)}"
+
+    return output

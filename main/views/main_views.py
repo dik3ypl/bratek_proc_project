@@ -1,12 +1,6 @@
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
-from django.contrib.auth.tokens import default_token_generator
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.utils.http import urlsafe_base64_decode
-from django.views.decorators.http import require_http_methods
-
-from main import controllers
+from main.controllers import main_controller
+from main.forms.playground_form import PlaygroundForm
 
 
 def home(request):
@@ -16,4 +10,8 @@ def home(request):
 
 
 def playground(request):
-    return controllers.playground(request)
+    if request.method == 'POST':
+        output = main_controller.playground(PlaygroundForm(request.POST or None))
+        return render(request, 'main/playground.html', {"output": output})
+
+    return render(request, 'main/playground.html', {"output": None})

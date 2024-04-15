@@ -5,12 +5,16 @@ from django.contrib.auth.models import User
 
 
 class RegisterForm(ModelForm):
-    password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
+    username = forms.CharField()
+    email = forms.EmailField()
+    name = forms.CharField()
+    surname = forms.CharField()
+    password1 = forms.CharField(widget=forms.PasswordInput)
+    password2 = forms.CharField(widget=forms.PasswordInput)
 
     class Meta:
         model = User
-        fields = ('email',)
+        fields = ('username',)
 
     def clean_password2(self):
         password1 = self.cleaned_data.get('password1')

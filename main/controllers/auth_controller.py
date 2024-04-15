@@ -8,13 +8,14 @@ from django.shortcuts import redirect
 from django.utils.http import urlsafe_base64_decode
 
 from mail.sender import send_activation_email
+from main.forms.login_form import LoginForm
 
 
 def register(request):
     form = UserCreationForm(request.POST)
     if form.is_valid():
         user = form.save(commit=False)
-        user.email = request.POST['email']
+        user.username = request.POST['email']
         user.is_active = False
         user.save()
 
@@ -24,25 +25,23 @@ def register(request):
 
 
 def login_user(request):
-    username = request.POST.get('username', '')
-    password = request.POST.get('password', '')
-    user = authenticate(request, username=username, password=password)
+    form = LoginForm(request.POST)
+
+    if not form.is_valid():
+        return HttpResponse("Invalid credentials.")
+
+    user = authenticate(request, username=form.cleaned_data['username'], password=form.cleaned_data['password'])
 
     if user is None:
-        user = User.objects.filter(email=username).first()
-        if user:
-            user = authenticate(request, username=user.username, password=password)
-        else:
+        user = authenticate(request, email=form.cleaned_data['username'], password=form.cleaned_data['password'])
+        if user is None:
             return HttpResponse("Invalid credentials.")
 
-    if user is not None:
-        if user.is_active:
-            login(request, user)
-            return redirect('home')
-        else:
-            return HttpResponse("Inactive account.")
+    if user.is_active:
+        login(request, user)
+        return redirect('home')
 
-    return HttpResponse("Invalid credentials.")
+    return HttpResponse("Inactive account.")
 
 
 def activate(request, uidb64, token):
