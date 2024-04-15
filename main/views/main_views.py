@@ -17,27 +17,3 @@ def home(request):
 
 def playground(request):
     return controllers.playground(request)
-
-
-def register(request):
-    form = UserCreationForm()
-    if request.method == 'POST':
-        return controllers.register(request)
-
-    return render(request, 'main/register.html', {'form': form})
-
-
-def login(request):
-    if request.method == "POST":
-        return controllers.login_user(request)
-
-    return render(request, 'main/login.html')
-
-
-def activate(request, uidb64, token):
-    return controllers.activate(request, uidb64, token)
-
-
-@require_http_methods(["POST"])
-def logout(request):
-    return controllers.logout_user(request)

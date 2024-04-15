@@ -5,16 +5,43 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e26aeefd-a0ec-42ba-8dbb-a2276dd44066" name="Changes" comment="Add requirements.txt">
-      <change afterPath="$PROJECT_DIR$/mail/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mail/sender.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/mail/registration.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/controllers/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/controllers/auth_controller.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/controllers/main_controller.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/forms/login_form.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/forms/playground_form.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/forms/register_form.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/views/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/views/auth_views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/views/main_views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/panel/forms/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/panel/forms/solution_form.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/panel/models/group.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/panel/views/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/panel/views/dashboard_views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/panel/views/solutions_views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/panel/views/task_views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/auth/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/auth/register.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/navigation.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/panel/submit_solution.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/panel/view_tasks.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/bratek_proc_project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/bratek_proc_project.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/helper.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/common/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/common/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/controllers.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/controllers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/common/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/controllers.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/models.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/panel/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/panel/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/panel/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/panel/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/panel/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/panel/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main/register.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,9 +96,9 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "django.template.preview.state": "SHOW_EDITOR_AND_PREVIEW",
-    "git-widget-placeholder": "dev/michal",
+    "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/AGH/bratek_proc_project",
+    "last_opened_file_path": "C:/AGH/bratek_proc_project/solutions",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -83,18 +110,18 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\AGH\bratek_proc_project\solutions" />
       <recent name="C:\AGH\bratek_proc_project\tmp" />
       <recent name="C:\AGH\bratek_proc_project\app\enums" />
       <recent name="C:\AGH\bratek_proc_project\app\views" />
       <recent name="C:\AGH\bratek_proc_project\app\forms" />
-      <recent name="C:\AGH\bratek_proc_project\app\managers" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\AGH\bratek_proc_project\mail" />
-      <recent name="C:\AGH\bratek_proc_project\app" />
-      <recent name="C:\AGH\bratek_proc_project\common" />
-      <recent name="C:\AGH\bratek_proc_project\app\forms\user" />
-      <recent name="C:\AGH\bratek_proc_project\app\models" />
+      <recent name="C:\AGH\bratek_proc_project\templates" />
+      <recent name="C:\AGH\bratek_proc_project\templates\panel" />
+      <recent name="C:\AGH\bratek_proc_project\templates\auth" />
+      <recent name="C:\AGH\bratek_proc_project\panel\forms" />
+      <recent name="C:\AGH\bratek_proc_project\panel\views" />
     </key>
   </component>
   <component name="RunManager">

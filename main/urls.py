@@ -1,11 +1,12 @@
 from django.urls import path
-from . import views
+from .views import auth_views, main_views
 
 urlpatterns = [
-    path('', views.home, name='home'),
-    path('login/', views.login, name='login'),
-    path('logout/', views.logout, name='logout'),
-    path('register/', views.register, name='register'),
-    path('activate/<uidb64>/<token>/', views.activate, name='activate'),
-    path('playground/', views.playground, name='playground'),
+    path('', main_views.home, name='home'),
+    path('playground/', main_views.playground, name='playground'),
+
+    path('login/', auth_views.login, name='login'),
+    path('logout/', auth_views.logout, name='logout'),
+    path('register/', auth_views.register, name='register'),
+    path('activate/<uidb64>/<token>/', auth_views.activate, name='activate'),
 ]

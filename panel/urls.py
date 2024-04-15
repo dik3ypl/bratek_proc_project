@@ -1,9 +1,9 @@
-from django.conf.urls.static import static
 from django.urls import path
 
-from common import settings
-from .views import dashboard
+from .views import dashboard_views, task_views, solutions_views
 
 urlpatterns = [
-                  path('', dashboard, name='dashboard'),
-              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('', dashboard_views.dashboard, name='dashboard'),
+    path('submit_solution/<int:task_id>/', solutions_views.submit_solution, name='submit_solution'),
+    path('tasks/', task_views.view_tasks, name='view_tasks'),
+]
