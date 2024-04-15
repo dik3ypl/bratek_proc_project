@@ -35,7 +35,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'gmailapi_backend',
     'main',
     'panel',
 ]
@@ -101,6 +100,14 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+# E-mail configuration
+
+EMAIL_HOST = 'smtp.mailtrap.io'
+EMAIL_HOST_USER = '93420015c0a7c2'
+EMAIL_HOST_PASSWORD = 'acae69253e6587'
+EMAIL_PORT = '2525'
+EMAIL_USE_TLS = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/

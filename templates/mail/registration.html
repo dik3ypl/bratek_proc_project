@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <p>Hi {{ user.username }},</p>
+    <p>Thank you for registering. Please click on the link below to activate your account:</p>
+    <a href="http://{{ domain }}{% url 'activate' uidb64=uid token=token %}">Activate your account</a>
+</div>
+</body>
+</html>

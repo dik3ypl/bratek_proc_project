@@ -4,16 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e26aeefd-a0ec-42ba-8dbb-a2276dd44066" name="Changes" comment="Setup /playground - test environment">
-      <change afterPath="$PROJECT_DIR$/templates/main/register.html" afterDir="false" />
+    <list default="true" id="e26aeefd-a0ec-42ba-8dbb-a2276dd44066" name="Changes" comment="Add requirements.txt">
+      <change afterPath="$PROJECT_DIR$/mail/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mail/sender.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/mail/registration.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/common/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/controllers.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/controllers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/playground.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/playground.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tmp/.gitkeep" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/layouts/layout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/register.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,13 +71,13 @@
     "django.template.preview.state": "SHOW_EDITOR_AND_PREVIEW",
     "git-widget-placeholder": "dev/michal",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/AGH/bratek_proc_project/tmp",
+    "last_opened_file_path": "C:/AGH/bratek_proc_project",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.sourceCode",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -147,6 +148,8 @@
       <workItem from="1713046660884" duration="796000" />
       <workItem from="1713110794349" duration="618000" />
       <workItem from="1713112483661" duration="11164000" />
+      <workItem from="1713136895010" duration="10000" />
+      <workItem from="1713136906118" duration="2820000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Django commit">
       <option name="closed" value="true" />
