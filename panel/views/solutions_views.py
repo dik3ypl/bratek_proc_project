@@ -9,6 +9,7 @@ from ..models import Solution, Task
 def submit_solution(request, task_id):
     if request.method == 'POST':
         form = SolutionForm(request.POST, request.FILES)
+
         if form.is_valid():
             solution = form.save()
             results = run_tests(solution)
