@@ -1,9 +1,9 @@
+from django.contrib import messages
 from django.utils.encoding import force_str
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.tokens import default_token_generator
-from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.utils.http import urlsafe_base64_decode
 
@@ -21,28 +21,31 @@ def register(request):
 
         send_activation_email(request, user)
 
-        return HttpResponse('Please confirm your email address to complete the registration.')
+        messages.info(request, 'Check your email to activate your account')
+        return redirect('home')
 
 
 def login_user(request):
     form = LoginForm(request.POST)
 
     if not form.is_valid():
-        print(form)
-        return HttpResponse("Invalid credentials.")
+        messages.error(request, 'Invalid credentials')
+        return redirect('login')
 
     user = authenticate(request, username=form.cleaned_data['username'], password=form.cleaned_data['password'])
 
     if user is None:
         user = authenticate(request, email=form.cleaned_data['username'], password=form.cleaned_data['password'])
         if user is None:
-            return HttpResponse("Invalid credentials.")
+            messages.error(request, 'Invalid credentials')
+            return redirect('login')
 
     if user.is_active:
         login(request, user)
         return redirect('home')
 
-    return HttpResponse("Inactive account.")
+    messages.error(request, 'Inactive account')
+    return redirect('login')
 
 
 def activate(request, uidb64, token):
@@ -52,6 +55,8 @@ def activate(request, uidb64, token):
     if user is not None and default_token_generator.check_token(user, token):
         user.is_active = True
         user.save()
-        return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
-    else:
-        return HttpResponse('Activation link is invalid!')
+        messages.info(request, 'Thank you for your email confirmation. Now you can login your account.')
+        return redirect('home')
+
+    messages.error(request, 'Cannot activate your account')
+    return redirect('home')

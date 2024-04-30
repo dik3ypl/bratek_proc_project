@@ -1,5 +1,7 @@
 import tempfile
 import importlib.util
+
+from django.contrib import messages
 from django.utils.encoding import force_str
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
@@ -17,7 +19,7 @@ from mail.sender import send_activation_email
 
 def playground(form):
     if not form.is_valid():
-        return HttpResponse("Error.")
+        return "Error"
 
     user_code = form.cleaned_data['code']
     args = form.cleaned_data['args']
