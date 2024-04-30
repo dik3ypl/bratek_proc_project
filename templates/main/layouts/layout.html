@@ -1,29 +1,21 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}My Site{% endblock %}</title>
+    <title>ASD Mini - {% block title %}{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com/?version=3.1.8"></script>
 </head>
-<body>
-<header>
-    <h1>Welcome to Our Site!</h1>
-    {% if user.is_authenticated %}
-        <p>Logged in as {{ user.username }}.
-        <form method="post" action="{% url 'logout' %}">
-            {% csrf_token %}
-            <button type="submit">Wyloguj się</button>
-        </form>
-    {% else %}
-        <a href="{% url 'login' %}">Log In</a>
-        <a href="{% url 'register' %}">Register</a>
-    {% endif %}
-    <a href="{% url 'playground' %}">Playground</a>
-</header>
-
-{% block content %}
-    <!-- Content -->
-{% endblock %}
-
+<body class="h-screen overflow-hidden items-center justify-center" style="background: #edf2f7;">
+<div class="bg-gray-100 flex justify-center items-center h-screen">
+    <div class="w-1/2 h-screen hidden lg:block">
+        <img src="{% static 'images/programmer.jpg' %}" alt=""
+             class="object-cover w-full h-full">
+    </div>
+    {% block content %}
+        <!-- Content -->
+    {% endblock %}
+</div>
 </body>
 </html>
