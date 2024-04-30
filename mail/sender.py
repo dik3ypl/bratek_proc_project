@@ -17,6 +17,6 @@ def send_activation_email(request, user):
         'uid': urlsafe_base64_encode(force_bytes(user.pk)),
         'token': default_token_generator.make_token(user),
     })
-    from_email = 'from@yourdomain.com'
+    from_email = 'asd@mini.com'
 
-    send_mail(subject, message, from_email, [user.email], html_message=html_message)
+    print(send_mail(subject, message, from_email, [user.email], html_message=html_message, fail_silently=False))

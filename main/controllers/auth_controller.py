@@ -9,13 +9,13 @@ from django.utils.http import urlsafe_base64_decode
 
 from mail.sender import send_activation_email
 from main.forms.login_form import LoginForm
+from main.forms.register_form import RegisterForm
 
 
 def register(request):
-    form = UserCreationForm(request.POST)
+    form = RegisterForm(request.POST)
     if form.is_valid():
         user = form.save(commit=False)
-        user.username = request.POST['email']
         user.is_active = False
         user.save()
 
@@ -28,6 +28,7 @@ def login_user(request):
     form = LoginForm(request.POST)
 
     if not form.is_valid():
+        print(form)
         return HttpResponse("Invalid credentials.")
 
     user = authenticate(request, username=form.cleaned_data['username'], password=form.cleaned_data['password'])

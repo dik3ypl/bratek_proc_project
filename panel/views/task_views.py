@@ -1,7 +1,9 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from ..models import Task, Solution
 
 
+@login_required
 def view_tasks(request):
     tasks = Task.objects.all()
 
@@ -12,5 +14,4 @@ def view_tasks(request):
     else:
         user_solutions_dict = {}
 
-    return render(request, 'task/view_tasks.html', {'tasks': tasks, 'user_solutions_dict': user_solutions_dict})
-
+    return render(request, 'panel/view_tasks.html', {'tasks': tasks, 'user_solutions_dict': user_solutions_dict})

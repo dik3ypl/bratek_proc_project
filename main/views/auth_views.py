@@ -4,6 +4,7 @@ from django.views.decorators.http import require_http_methods
 from ..controllers import auth_controller
 from ..forms.login_form import LoginForm
 from ..forms.register_form import RegisterForm
+from django.contrib.auth import logout
 
 
 def register(request):
@@ -27,6 +28,6 @@ def activate(request, uidb64, token):
 
 
 @require_http_methods(["POST"])
-def logout(request):
+def logout_user(request):
     logout(request)
     return redirect('home')

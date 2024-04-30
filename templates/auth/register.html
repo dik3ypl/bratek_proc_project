@@ -1,86 +1,54 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            max-width: 400px;
-            margin: 50px auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        h2 {
-            text-align: center;
-            color: #333;
-        }
-
-        form {
-            margin-top: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        input[type="text"],
-        input[type="password"],
-        input[type="email"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        button[type="submit"] {
-            width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            border: none;
-            color: #fff;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        button[type="submit"]:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <script src="https://cdn.tailwindcss.com/?version=3.1.8"></script>
 </head>
-<body>
-<div class="container">
-    <h2>Register</h2>
-    <form method="post" action="{% url 'register' %}">
-        {% csrf_token %}
-        <label for="username">Username:</label>
-        {{ form.username }}
-        <label for="email">Email:</label>
-        {{ form.email }}
-        <label for="email">Name:</label>
-        {{ form.name }}
-        <label for="email">Surname:</label>
-        {{ form.surname }}
-        <label for="password1">Password:</label>
-        {{ form.password1 }}
-        <label for="password2">Confirm Password:</label>
-        {{ form.password2 }}
-        <button type="submit">Register</button>
-    </form>
+<body class="h-screen overflow-hidden items-center justify-center" style="background: #edf2f7;">
+<div class="bg-gray-100 flex justify-center items-center h-screen">
+    <div class="w-1/2 h-screen hidden lg:block">
+        <img src="{% static 'images/programmer.jpg' %}" alt=""
+             class="object-cover w-full h-full">
+    </div>
+    <div class="lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-1/2">
+        <h1 class="text-2xl font-semibold mb-4">Register</h1>
+        <form action="{% url 'register' %}" method="POST">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label for="username" class="block text-gray-600">Username</label>
+                {{ form.username }}
+            </div>
+            <div class="mb-4">
+                <label for="email" class="block text-gray-600">E-mail</label>
+                {{ form.email }}
+            </div>
+            <div class="mb-4">
+                <label for="name" class="block text-gray-600">Name</label>
+                {{ form.name }}
+            </div>
+            <div class="mb-4">
+                <label for="surname" class="block text-gray-600">Surname</label>
+                {{ form.surname }}
+            </div>
+            <div class="mb-4">
+                <label for="password1" class="block text-gray-600">Password</label>
+                {{ form.password1 }}
+            </div>
+            <div class="mb-4">
+                <label for="password1" class="block text-gray-600">Confirm password</label>
+                {{ form.password2 }}
+            </div>
+            <button type="submit"
+                    class="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md py-2 px-4 w-full">Register
+            </button>
+        </form>
+        <div class="mt-6 text-center">
+            Already have an account? <a href="{% url 'login' %}" class="text-blue-500 hover:underline">Login in here</a>
+        </div>
+    </div>
 </div>
 </body>
 </html>
-
