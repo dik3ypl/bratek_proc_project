@@ -12,7 +12,7 @@ def register(request):
     if request.method == 'POST':
         return auth_controller.register(request)
 
-    return render(request, 'auth/../../templates/main/register.html', {'form': form})
+    return render(request, 'main/register.html', {'form': form})
 
 
 def login(request):
@@ -20,7 +20,7 @@ def login(request):
     if request.method == "POST":
         return auth_controller.login_user(request)
 
-    return render(request, 'auth/../../templates/main/login.html', {'form': form})
+    return render(request, 'main/login.html', {'form': form})
 
 
 def activate(request, uidb64, token):

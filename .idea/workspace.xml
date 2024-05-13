@@ -5,13 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e26aeefd-a0ec-42ba-8dbb-a2276dd44066" name="Changes" comment="Create main/layout.html">
-      <change afterPath="$PROJECT_DIR$/templates/alert/danger.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/alert/success.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/panel/controllers/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/panel/controllers/group_controller.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/panel/forms/group_form.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/panel/views/group_views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/panel/create_group.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/panel/groups.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/panel/layouts/layout.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/controllers/auth_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/controllers/auth_controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/layouts/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/layouts/layout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/controllers/main_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/controllers/main_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/forms/playground_form.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/forms/playground_form.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/views/auth_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/views/auth_views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/views/main_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/views/main_views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/panel/functions/testing_function.py" beforeDir="false" afterPath="$PROJECT_DIR$/panel/functions/testing_function.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/panel/models/group.py" beforeDir="false" afterPath="$PROJECT_DIR$/panel/models/group.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/panel/models/task.py" beforeDir="false" afterPath="$PROJECT_DIR$/panel/models/task.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/panel/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/panel/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/panel/views/solutions_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/panel/views/solutions_views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/main/playground.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/playground.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/navigation.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/navigation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/panel/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/panel/dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/panel/submit_solution.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/panel/submit_solution.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +70,7 @@
   <component name="GithubPullRequestsUISettings"><![CDATA[{
   "selectedUrlAndAccountId": {
     "url": "https://github.com/dik3ypl/bratek_proc_project.git",
-    "accountId": "7f832e7e-6506-442b-8822-a6b48a1d727d"
+    "accountId": "20caeb61-e626-4f96-aaa2-552ee246a94e"
   }
 }]]></component>
   <component name="ProjectColorInfo">{
@@ -79,7 +93,7 @@
     "django.template.preview.state": "SHOW_EDITOR_AND_PREVIEW",
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/AGH/bratek_proc_project/solutions",
+    "last_opened_file_path": "C:/AGH/bratek_proc_project/templates/panel",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -87,15 +101,20 @@
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "com.intellij.pycharm.community.ide.impl.configuration.PythonContentEntriesConfigurable",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\AGH\bratek_proc_project\templates\panel" />
       <recent name="C:\AGH\bratek_proc_project\solutions" />
       <recent name="C:\AGH\bratek_proc_project\tmp" />
       <recent name="C:\AGH\bratek_proc_project\app\enums" />
       <recent name="C:\AGH\bratek_proc_project\app\views" />
-      <recent name="C:\AGH\bratek_proc_project\app\forms" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\AGH\PWJP\bratek_proc_project\templates\main" />

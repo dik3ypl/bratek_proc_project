@@ -1,51 +1,61 @@
 import tempfile
 import importlib.util
+import time
+import ast
 
 from django.contrib import messages
-from django.utils.encoding import force_str
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
-from django.contrib.auth.tokens import default_token_generator
-from django.contrib.sites.shortcuts import get_current_site
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from django.template.loader import render_to_string
-from django.utils.encoding import force_bytes
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-
-from mail.sender import send_activation_email
 
 
-def playground(form):
+def playground(request, form):
     if not form.is_valid():
-        return "Error"
+        messages.error(request, "Form data is invalid.")
+        return None
 
     user_code = form.cleaned_data['code']
     args = form.cleaned_data['args']
     expected = form.cleaned_data['expected']
-    function = form.cleaned_data['function']
+    function_name = form.cleaned_data['function']
 
-    args_list = [eval(arg.strip()) for arg in args.split(',')] if args else []
-    expected_list = [eval(exp.strip()) for exp in expected.split(',')] if expected else []
+    # Parsing user data, should use try/except
+    try:
+        args_list = ast.literal_eval(f"[{args}]")
+    except ValueError:
+        messages.error(request, "Form arguments list is invalid.")
+        return None
+
+    # Parsing user data, should use try/except
+    try:
+        expected_list = ast.literal_eval(f"[{expected}]")
+    except ValueError:
+        messages.error(request, "Form expected data is invalid.")
+        return None
 
     with tempfile.NamedTemporaryFile(delete=False, suffix='.py', mode='w') as script_file:
         script_file.write(user_code)
         script_path = script_file.name
 
-    spec = importlib.util.spec_from_file_location("user_module", script_path)
-    user_module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(user_module)
-
+    # Parsing user data, should use try/except
     try:
-        user_function = getattr(user_module, function)
+        spec = importlib.util.spec_from_file_location("user_module", script_path)
+        user_module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(user_module)
+
+        start_time = time.time()
+
+        user_function = getattr(user_module, function_name)
         result = user_function(*args_list)
-        output = f"Result of {function}: {result}"
+
+        end_time = time.time()
+        execution_time = round(end_time - start_time, 3)
+
         if result in expected_list:
-            output += " — Result is as expected."
+            output = {'result': 'Pass', 'execution_time': execution_time}
         else:
-            output += " — Result differs from expected."
-    except Exception as e:
-        output = f"Error while executing user function: {str(e)}"
+            output = {'result': 'Fail', 'actual_output': result,
+                      'execution_time': execution_time}
+    except Exception as error:
+        output = {'error': str(error)}
 
     return output

@@ -1,8 +1,13 @@
 from django.db import models
 
+from .group import Group
+
 
 class Task(models.Model):
     title = models.CharField(max_length=128)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    function_name = models.CharField(max_length=128)
+    function_starter = models.TextField(null=True)
     description = models.TextField()
 
     def __str__(self):

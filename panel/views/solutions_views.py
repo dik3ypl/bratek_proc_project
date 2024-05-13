@@ -12,7 +12,7 @@ def submit_solution(request, task_id):
 
         if form.is_valid():
             solution = form.save()
-            results = run_tests(solution)
+            results = run_tests(request, solution)
             solution.test_results = results
             solution.save()
             return redirect('submit_solution', task_id=solution.task.id)

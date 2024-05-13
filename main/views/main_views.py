@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from main.controllers import main_controller
 from main.forms.playground_form import PlaygroundForm
@@ -10,8 +11,12 @@ def home(request):
 
 
 def playground(request):
+    form = PlaygroundForm()
     if request.method == 'POST':
-        output = main_controller.playground(PlaygroundForm(request.POST or None))
-        return render(request, 'main/playground.html', {"output": output})
+        form = PlaygroundForm(request.POST or None)
+        output = main_controller.playground(request, form)
+        if output is None:
+            messages.error(request, 'Error parsing given data')
+        return render(request, 'main/playground.html', {"form": form, "output": output})
 
-    return render(request, 'main/playground.html', {"output": None})
+    return render(request, 'main/playground.html', {"form": form, "output": None})

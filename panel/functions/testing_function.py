@@ -1,39 +1,52 @@
 from django.core.files.storage import default_storage
 from ..models import TestCase
 import subprocess
+import importlib.util
 import time
+import ast
+
+from django.contrib import messages
 
 
-def run_tests(solution):
+def run_tests(request, solution):
     test_cases = TestCase.objects.filter(task=solution.task)
     results = {}
 
-    file_content = default_storage.open(solution.solution_file.name).read()
-
     for test_case in test_cases:
-        input_data = test_case.input_data.encode()
+        # Parsing user data, should use try/except
+        try:
+            args_list = ast.literal_eval(f"[{test_case.input_data}]")
+        except ValueError:
+            messages.error(request, "Arguments list is invalid.")
+            return None
 
-        start_time = time.time()
+        # Parsing user data, should use try/except
+        try:
+            expected_list = ast.literal_eval(f"[{test_case.expected_output}]")
+        except ValueError:
+            messages.error(request, "Form expected data is invalid.")
+            return None
 
-        process = subprocess.Popen(['python3', solution.solution_file.path], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        output, error = process.communicate(input=input_data)
-        print("Input data: ", input_data)
-        print("Output data: ", output)
-        end_time = time.time()
-        execution_time = round(end_time - start_time, 3)
+        # Parsing user data, should use try/except
+        try:
+            spec = importlib.util.spec_from_file_location("user_module", solution.solution_file.path)
+            user_module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(user_module)
 
-        if process.returncode != 0:
-            results[test_case.id] = {'error': error.decode(), 'execution_time': execution_time}
-        else:
-            actual_output = output.decode().strip().replace(' ', '')
-            expected_output = test_case.expected_output.strip().replace(' ', '')
-            print("Actual output: ", actual_output)
-            print(type(actual_output))
-            print("Expected output: ", expected_output)
-            print(type(expected_output))
-            if actual_output == expected_output:
+            start_time = time.time()
+
+            user_function = getattr(user_module, "f")
+            result = user_function(*args_list)
+
+            end_time = time.time()
+            execution_time = round(end_time - start_time, 3)
+
+            if result in expected_list:
                 results[test_case.id] = {'result': 'Pass', 'execution_time': execution_time}
             else:
-                results[test_case.id] = {'result': 'Fail', 'actual_output': actual_output, 'execution_time': execution_time}
+                results[test_case.id] = {'result': 'Fail', 'actual_output': result,
+                                         'execution_time': execution_time}
+        except Exception as error:
+            results[test_case.id] = {'error': str(error)}
 
     return results

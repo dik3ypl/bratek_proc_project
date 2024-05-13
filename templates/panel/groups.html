@@ -1,0 +1,38 @@
+{% extends 'panel/layouts/layout.html' %}
+{% load static %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <div class="container mx-auto px-4">
+        <h1 class="text-xl font-bold my-4">My Groups</h1>
+        <div class="grid grid-cols-4 gap-4">
+            {% for group in groups %}
+                <div class="cursor-pointer">
+{#                    <a href="{% url 'group_profile' group.id %}">#}
+                    <a href="#">
+                        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                            {% if group.image %}
+                                <img src="{{ group.image.url }}" alt="{{ group.name }}"
+                                     class="w-full h-32 sm:h-48 object-cover">
+                            {% else %}
+                                <img src="{% static 'images/default_group.png' %}" alt="Default Image"
+                                     class="w-full h-32 sm:h-48 object-cover">
+                            {% endif %}
+                            <div class="p-4">
+                                <h2 class="text-lg font-bold">{{ group.name }}</h2>
+                                <p>{{ group.creator.get_full_name }}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% empty %}
+                <div class="col-span-4 text-center py-8">
+                    <p class="text-gray-500">You do not have any groups. <a href="{% url 'create_group' %}"
+                                                                            class="text-blue-500 hover:underline">Create
+                        one now.</a></p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
