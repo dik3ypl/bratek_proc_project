@@ -9,7 +9,7 @@
         <div class="grid grid-cols-4 gap-4">
             {% for group in groups %}
                 <div class="cursor-pointer">
-{#                    <a href="{% url 'group_profile' group.id %}">#}
+                    {#                    <a href="{% url 'group_profile' group.id %}">#}
                     <a href="#">
                         <div class="bg-white shadow-lg rounded-lg overflow-hidden">
                             {% if group.image %}
@@ -28,9 +28,7 @@
                 </div>
             {% empty %}
                 <div class="col-span-4 text-center py-8">
-                    <p class="text-gray-500">You do not have any groups. <a href="{% url 'create_group' %}"
-                                                                            class="text-blue-500 hover:underline">Create
-                        one now.</a></p>
+                    <p class="text-gray-500">You do not have any groups.</p>
                 </div>
             {% endfor %}
         </div>
