@@ -122,5 +122,20 @@
             </ul>
         </div>
     </div>
+
+    <div>
+        <h2>Statistics</h2>
+        <ul>
+            <li>Solutions run: {{ stats.solutions_number }}</li>
+            <li>
+                Tests passed: <span class="pass">{{ stats.tests_passed }}</span>/{{ stats.tests_number }}
+            </li>
+            <li>
+                Tests failed: <span class="fail">{{ stats.tests_failed }}</span>/{{ stats.tests_number }}
+            </li>
+            <li>Average test time: {{ stats.average_test_time }} seconds</li>
+            <li>Total time: {{ stats.total_time }} seconds</li>
+        </ul>
+    </div>
 </body>
 </html>
