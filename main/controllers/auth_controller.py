@@ -23,6 +23,10 @@ def register(request):
 
         messages.info(request, 'Check your email to activate your account')
         return redirect('home')
+    else:
+        print(form.errors)
+        messages.error(request, 'Invalid data provided. Please try again')
+        return redirect('register')
 
 
 def login_user(request):
