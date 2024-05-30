@@ -3,6 +3,9 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 import uuid
 
+from common import settings
+from panel.enums.role import Role
+
 
 class Group(models.Model):
     name = models.CharField(max_length=100, verbose_name=_("Name"))
@@ -26,3 +29,16 @@ class Group(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class GroupMembership(models.Model):
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name='memberships')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='memberships')
+    role = models.CharField(max_length=10, choices=Role.choices, verbose_name=_("Role"))
+    joined_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Joined at"))
+
+    class Meta:
+        unique_together = ('group', 'user')
+
+    def __str__(self):
+        return f"{self.user.username} - {self.group.name} - {self.role}"

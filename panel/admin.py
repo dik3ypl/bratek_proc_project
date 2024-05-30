@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Task, TestCase, Solution, Group
+from .models.group import GroupMembership
 
 admin.site.register(Task)
 admin.site.register(TestCase)
@@ -24,3 +25,10 @@ class GroupAdmin(admin.ModelAdmin):
             'fields': ('name', 'description', 'join_code', 'creator', 'image', 'image_tag')
         }),
     )
+
+
+@admin.register(GroupMembership)
+class GroupMembershipAdmin(admin.ModelAdmin):
+    list_display = ['group', 'user', 'role', 'joined_at']
+    list_filter = ['role']
+    search_fields = ['group__name', 'user__username']
