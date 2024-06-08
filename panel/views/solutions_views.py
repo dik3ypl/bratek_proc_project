@@ -1,59 +1,86 @@
+import uuid
+
+from django.contrib import messages
 from django.shortcuts import render, redirect
+from django.conf import settings
+from django.utils import timezone
+
 from ..forms import SolutionForm
 from django.contrib.auth.decorators import login_required
-from ..functions import run_tests
-from ..models import Solution, Task
+from ..functions import run_tests, count_stats, count_table
+from ..models import Solution, Task, GroupMembership
+import os
 
 
 @login_required
 def submit_solution(request, task_id):
+    task = Task.objects.get(id=task_id)
+    user = request.user
+
+    if task.end_date and task.end_date < timezone.now():
+        messages.error(request, "You can no longer submit a solution for this task..")
+        return redirect('dashboard')
+    if task.max_attempts and Solution.objects.filter(user=user, task=task).count() >= task.max_attempts:
+        messages.error(request, "You can no longer submit a solution for this task..")
+        return redirect('dashboard')
+
+    if task.group.creator == user:
+        user_role = 'OWNER'
+    else:
+        membership = GroupMembership.objects.filter(user=user, group=task.group).first()
+        if not membership:
+            messages.error(request, "It's not your task.")
+            return redirect('dashboard')
+        user_role = membership.role
+
+    previous_solutions = Solution.objects.filter(user=user, task_id=task_id)
+    if previous_solutions.exists():
+        last_solution = previous_solutions.latest('submitted_at')
+        with open(os.path.join(settings.MEDIA_ROOT, last_solution.solution_file.name), 'r') as file:
+            default_code = file.read()
+    else:
+        default_code = task.function_starter
+
     if request.method == 'POST':
         form = SolutionForm(request.POST, request.FILES)
-
         if form.is_valid():
-            solution = form.save()
+            solution_type = form.cleaned_data['solution_type']
+            if solution_type == 'text':
+                python_code = form.cleaned_data['python_code']
+                filename = f'solutions/{uuid.uuid1()}.py'
+                file_path = os.path.join(settings.MEDIA_ROOT, filename)
+
+                with open(file_path, 'w') as file:
+                    file.write(python_code)
+
+                solution = Solution(
+                    user=user,
+                    task=task,
+                    solution_file=filename
+                )
+                solution.save()
+            else:
+                solution = form.save()
+
             results = run_tests(request, solution)
             solution.test_results = results
             solution.save()
+
             return redirect('submit_solution', task_id=solution.task.id)
     else:
-        form = SolutionForm(initial={'task': task_id, 'user': request.user})
+        form = SolutionForm(initial={'task': task_id, 'user': request.user, 'python_code': default_code})
 
-    previous_solutions = Solution.objects.filter(user=request.user, task_id=task_id)
-    task = Task.objects.get(id=task_id)
-    return render(request, 'panel/submit_solution.html',
-                  {'task': task,
-                   'form': form,
-                   'task_id': task_id,
-                   'previous_solutions': previous_solutions,
-                   'user': request.user,
-                   'stats': count_stats(previous_solutions)
-                   })
+    previous_solutions = Solution.objects.filter(user=user, task_id=task_id)
+    stats = count_stats(previous_solutions)
+    ranking_table = count_table(task)
 
-
-def count_stats(solutions):
-    stats = {
-        'solutions_number': len(solutions),
-        'tests_number': 0,
-        'tests_passed': 0,
-        'tests_failed': 0,
-        'average_test_time': 0,
-        'total_time': 0,
-    }
-    results = []
-    if len(solutions) == 0:
-        return stats
-    for solution in solutions:
-        for value in solution.test_results.values():
-            results.append(value)
-
-    for result in results:
-        if result['result'] == 'Pass':
-            stats['tests_passed'] += 1
-        else:
-            stats['tests_failed'] += 1
-        stats['total_time'] += result['execution_time']
-
-    stats['tests_number'] = stats['tests_failed'] + stats['tests_passed']
-    stats['average_test_time'] = stats['total_time'] / stats['tests_number']
-    return stats
+    return render(request, 'panel/submit_solution.html', {
+        'task': task,
+        'form': form,
+        'task_id': task_id,
+        'previous_solutions': previous_solutions,
+        'user': user,
+        'stats': stats,
+        'user_role': user_role,
+        'ranking_table': ranking_table
+    })

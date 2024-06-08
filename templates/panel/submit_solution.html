@@ -1,156 +1,250 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Submit Solution</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
+{% extends 'panel/layouts/layout.html' %}
+{% load static %}
 
-        h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
+{% block title %}Submit Solution{% endblock %}
 
-        .solution-container {
-            display: flex;
-            gap: 20px;
-            border: 1px solid #ccc; /* Ramka wokół kontenera */
-            border-radius: 5px;
-            overflow: hidden; /* Zapobiega przekraczaniu ramki przez zawartość */
-        }
+{% block content %}
+    <div class="container overflow-x-auto overflow-y-auto mx-auto px-4">
+        <h1 class="text-2xl font-bold my-4">{{ task.title }}</h1>
+        <p class="text-gray-700 mb-4">{{ task.description }}</p>
 
-        .add-task, .previous-solutions {
-            padding: 20px;
-            flex: 1;
-        }
+        {% if user_role == 'STUDENT' %}
+            <div class="mb-6 bg-white shadow-md rounded px-8 pt-6 pb-8">
+                <h2 class="text-lg font-bold mb-2">Submit Your Solution</h2>
+                <form method="post" enctype="multipart/form-data" class="mb-4">
+                    {% csrf_token %}
+                    <input type="hidden" name="task" value="{{ form.task.value }}">
+                    <input type="hidden" name="user" value="{{ form.user.value }}">
 
-        .add-task {
-            border-right: 1px solid #ccc; /* Ramka po prawej stronie formularza */
-        }
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Solution Type</label>
+                        {{ form.solution_type }}
+                    </div>
 
-        form {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            resize: vertical;
-        }
-
-        button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        .error-message {
-            color: red;
-        }
-
-        .previous-solutions ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .previous-solutions h2 {
-            font-size: 20px;
-            margin-bottom: 10px;
-        }
-
-        .test-results li {
-            margin-bottom: 5px;
-        }
-
-        .pass {
-            color: green;
-        }
-
-        .fail {
-            color: red;
-        }
-    </style>
-</head>
-<body>
-{% include '../navigation.html' %}
-<h1>Submit Solution to {{ task }}</h1>
-<h4>{{ task.description }}</h4>
-<div class="solution-container">
-    <div class="add-task">
-        <h2>Add New Solution</h2>
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <input type="hidden" name="task" value="{{ task_id }}">
-            <input type="hidden" name="user" value="{{ request.user.id }}">
-            <label for="id_solution_file">Solution File:</label>
-            {{ form.solution_file }}
-            {% if form.errors %}
-                <div class="error-message">
-                    {% for field, errors in form.errors.items %}
-                        {% for error in errors %}
-                            {{ error }}
+                    <div class="mb-4" id="file-input" style="display: none;">
+                        <label for="solution_file" class="block text-gray-700 text-sm font-bold mb-2">Solution File</label>
+                        <input type="file" name="solution_file" id="solution_file"
+                               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        {% for error in form.solution_file.errors %}
+                            <p class="text-red-500 text-xs italic">{{ error }}</p>
                         {% endfor %}
-                    {% endfor %}
-                </div>
-            {% endif %}
+                    </div>
 
-            <button type="submit">Submit</button>
-        </form>
-    </div>
-    <div class="previous-solutions">
-        <h2>Previous Solutions</h2>
-        <ul>
-            {% for solution in previous_solutions %}
-                <li>
-                    <h3>{{ forloop.counter }}</h3>
-                    <ul class="test-results">
-                        {% for test_id, result in solution.test_results.items %}
-                            <li>
-                                Test {{ test_id }}:
-                                <span class="{% if result.result == 'Pass' %}pass{% else %}fail{% endif %}">
-                                        {{ result.error }}
-                                    </span>,
-                                    Execution Time: {{ result.execution_time }} seconds
-                                </li>
+                    <div class="mb-4" id="text-input" style="display: none;">
+                        <label for="python_code" class="block text-gray-700 text-sm font-bold mb-2">Python Code</label>
+                        <div id="codeEditor" style="height: 600px; width: 100%;">{{ form.python_code.value|default_if_none:'' }}</div>
+                        <textarea name="python_code" id="pythonTextarea" style="display: none;">{{ form.python_code.value|default_if_none:'' }}</textarea>
+                        {% for error in form.python_code.errors %}
+                            <p class="text-red-500 text-xs italic">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+
+                    <button type="submit"
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                        Submit
+                    </button>
+                </form>
+            </div>
+
+            <div class="mb-6 bg-white shadow-md rounded px-8 pt-6 pb-8 overflow-x-auto">
+                <h2 class="text-lg font-bold mb-2">Previous Solutions</h2>
+                {% if previous_solutions %}
+                    <table class="min-w-full bg-white">
+                        <thead>
+                        <tr>
+                            <th class="py-2 px-4 border-b-2 border-gray-200 text-left text-sm leading-4 text-gray-600 tracking-wider">Test #</th>
+                            <th class="py-2 px-4 border-b-2 border-gray-200 text-left text-sm leading-4 text-gray-600 tracking-wider">Result</th>
+                            <th class="py-2 px-4 border-b-2 border-gray-200 text-left text-sm leading-4 text-gray-600 tracking-wider">Execution Time</th>
+                            <th class="py-2 px-4 border-b-2 border-gray-200 text-left text-sm leading-4 text-gray-600 tracking-wider">Actual Output</th>
+                            <th class="py-2 px-4 border-b-2 border-gray-200 text-left text-sm leading-4 text-gray-600 tracking-wider">Expected Output</th>
+                            <th class="py-2 px-4 border-b-2 border-gray-200 text-left text-sm leading-4 text-gray-600 tracking-wider">Error</th>
+                            <th class="py-2 px-4 border-b-2 border-gray-200 text-left text-sm leading-4 text-gray-600 tracking-wider">Submitted At</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for solution in previous_solutions %}
+                            {% for test, result in solution.test_results.items %}
+                                <tr class="hover:bg-gray-100 {% if result.error %}bg-red-100{% endif %}">
+                                    <td class="py-2 px-4 border-b border-gray-200">{{ forloop.parentloop.counter }}.{{ forloop.counter }}</td>
+                                    <td class="py-2 px-4 border-b border-gray-200">
+                                        {% if result.error %}
+                                            <span class="text-red-500 font-bold">Error</span>
+                                        {% else %}
+                                            {% if result.result == 'Pass' %}
+                                                <span class="text-green-500 font-bold">Pass</span>
+                                            {% else %}
+                                                <span class="text-red-500 font-bold">Fail</span>
+                                            {% endif %}
+                                        {% endif %}
+                                    </td>
+                                    <td class="py-2 px-4 border-b border-gray-200">
+                                        {% if result.execution_time is not None %}
+                                            {{ result.execution_time }}s
+                                        {% else %}
+                                            N/A
+                                        {% endif %}
+                                    </td>
+                                    <td class="py-2 px-4 border-b border-gray-200">
+                                        {% if result.actual_output is not None %}
+                                            {{ result.actual_output }}
+                                        {% else %}
+                                            N/A
+                                        {% endif %}
+                                    </td>
+                                    <td class="py-2 px-4 border-b border-gray-200">
+                                        {% if result.expected_output is not None %}
+                                            {{ result.expected_output }}
+                                        {% else %}
+                                            N/A
+                                        {% endif %}
+                                    </td>
+                                    <td class="py-2 px-4 border-b border-gray-200">
+                                        {% if result.error %}
+                                            {{ result.error }}
+                                        {% else %}
+                                            N/A
+                                        {% endif %}
+                                    </td>
+                                    {% if forloop.first %}
+                                        <td class="py-2 px-4 border-b border-gray-200" rowspan="{{ solution.test_results|length }}">{{ solution.submitted_at }}</td>
+                                    {% endif %}
+                                </tr>
                             {% endfor %}
-                        </ul>
-                    </li>
-                {% endfor %}
-            </ul>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p class="text-gray-500">No previous solutions submitted.</p>
+                {% endif %}
+            </div>
+        {% else %}
+            <div class="mb-6 bg-white shadow-md rounded px-8 pt-6 pb-8">
+                <h2 class="text-lg font-bold mb-2">Task Management</h2>
+                <p>This section will contain task management functionalities for owners and instructors.</p>
+            </div>
+        {% endif %}
+
+        <div class="mb-6 bg-white shadow-md rounded px-8 pt-6 pb-8 overflow-x-auto">
+            <h2 class="text-lg font-bold mb-2">Statistics</h2>
+            <table class="min-w-full bg-white">
+                <thead>
+                <tr>
+                    <th class="py-2 px-4 border-b-2 border-gray-200 text-left text-sm leading-4 text-gray-600 tracking-wider">
+                        Statistic
+                    </th>
+                    <th class="py-2 px-4 border-b-2 border-gray-200 text-left text-sm leading-4 text-gray-600 tracking-wider">
+                        Value
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="hover:bg-gray-100">
+                    <td class="py-2 px-4 border-b border-gray-200">Total Solutions</td>
+                    <td class="py-2 px-4 border-b border-gray-200">{{ stats.solutions_number }}</td>
+                </tr>
+                <tr class="hover:bg-gray-100">
+                    <td class="py-2 px-4 border-b border-gray-200">Total Tests</td>
+                    <td class="py-2 px-4 border-b border-gray-200">{{ stats.tests_number }}</td>
+                </tr>
+                <tr class="hover:bg-gray-100">
+                    <td class="py-2 px-4 border-b border-gray-200">Tests Passed</td>
+                    <td class="py-2 px-4 border-b border-gray-200">{{ stats.tests_passed }}</td>
+                </tr>
+                <tr class="hover:bg-gray-100">
+                    <td class="py-2 px-4 border-b border-gray-200">Tests Failed</td>
+                    <td class="py-2 px-4 border-b border-gray-200">{{ stats.tests_failed }}</td>
+                </tr>
+                <tr class="hover:bg-gray-100">
+                    <td class="py-2 px-4 border-b border-gray-200">Average Test Time</td>
+                    <td class="py-2 px-4 border-b border-gray-200">{{ stats.average_test_time }}s</td>
+                </tr>
+                <tr class="hover:bg-gray-100">
+                    <td class="py-2 px-4 border-b border-gray-200">Total Time</td>
+                    <td class="py-2 px-4 border-b border-gray-200">{{ stats.total_time }}s</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mb-6 bg-white shadow-md rounded px-8 pt-6 pb-8 overflow-x-auto">
+            <h2 class="text-lg font-bold mb-2">Ranking</h2>
+            <table class="min-w-full bg-white">
+                <thead>
+                <tr>
+                    <th class="py-2 px-4 border-b-2 border-gray-200 text-left text-sm leading-4 text-gray-600 tracking-wider">
+                        Rank
+                    </th>
+                    <th class="py-2 px-4 border-b-2 border-gray-200 text-left text-sm leading-4 text-gray-600 tracking-wider">
+                        Username
+                    </th>
+                    <th class="py-2 px-4 border-b-2 border-gray-200 text-left text-sm leading-4 text-gray-600 tracking-wider">
+                        User e-mail
+                    </th>
+                    <th class="py-2 px-4 border-b-2 border-gray-200 text-left text-sm leading-4 text-gray-600 tracking-wider">
+                        Tests Passed
+                    </th>
+                    <th class="py-2 px-4 border-b-2 border-gray-200 text-left text-sm leading-4 text-gray-600 tracking-wider">
+                        Total Time
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                {% if ranking_table %}
+                    {% for rank, user_stat in ranking_table %}
+                        <tr class="hover:bg-gray-100 {% if forloop.counter == 1 %}bg-yellow-300{% elif forloop.counter == 2 %}bg-gray-300{% elif forloop.counter == 3 %}bg-yellow-500{% endif %}">
+                            <td class="py-2 px-4 border-b border-gray-200">
+                                <span class="font-bold">{{ forloop.counter }}</span>
+                            </td>
+                            <td class="py-2 px-4 border-b border-gray-200">
+                                <span class="font-bold">{{ user_stat.username }}</span>
+                            </td>
+                            <td class="py-2 px-4 border-b border-gray-200">
+                                {{ user_stat.user_mail }}
+                            </td>
+                            <td class="py-2 px-4 border-b border-gray-200">
+                                <span class="font-bold">{{ user_stat.tests_passed }}</span> / {{ user_stat.tests }}
+                            </td>
+                            <td class="py-2 px-4 border-b border-gray-200">
+                                <span class="font-bold">{{ user_stat.total_time }}s</span>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="5" class="py-2 px-4 border-b border-gray-200 text-center text-gray-500">
+                            No users to display in the ranking.
+                        </td>
+                    </tr>
+                {% endif %}
+                </tbody>
+            </table>
         </div>
     </div>
 
-    <div>
-        <h2>Statistics</h2>
-        <ul>
-            <li>Solutions run: {{ stats.solutions_number }}</li>
-            <li>
-                Tests passed: <span class="pass">{{ stats.tests_passed }}</span>/{{ stats.tests_number }}
-            </li>
-            <li>
-                Tests failed: <span class="fail">{{ stats.tests_failed }}</span>/{{ stats.tests_number }}
-            </li>
-            <li>Average test time: {{ stats.average_test_time }} seconds</li>
-            <li>Total time: {{ stats.total_time }} seconds</li>
-        </ul>
-    </div>
-</body>
-</html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const solutionTypeInputs = document.querySelectorAll('input[name="solution_type"]');
+            const fileInputDiv = document.getElementById('file-input');
+            const textInputDiv = document.getElementById('text-input');
+
+            solutionTypeInputs.forEach(input => {
+                input.addEventListener('change', function () {
+                    if (this.value === 'file') {
+                        fileInputDiv.style.display = 'block';
+                        textInputDiv.style.display = 'none';
+                    } else {
+                        fileInputDiv.style.display = 'none';
+                        textInputDiv.style.display = 'block';
+                    }
+                });
+            });
+
+            // Initialize ACE editor
+            const editor = ace.edit("codeEditor");
+            editor.setTheme("ace/theme/monokai");
+            editor.session.setMode("ace/mode/python");
+            editor.setValue(document.getElementById('pythonTextarea').value, -1);
+        });
+    </script>
+{% endblock %}

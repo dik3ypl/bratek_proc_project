@@ -9,6 +9,8 @@ class Task(models.Model):
     function_name = models.CharField(max_length=128)
     function_starter = models.TextField(null=True)
     description = models.TextField()
+    max_attempts = models.IntegerField(null=True, blank=True)
+    end_date = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return self.title

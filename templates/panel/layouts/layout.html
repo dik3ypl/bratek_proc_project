@@ -11,10 +11,12 @@
 <body class="h-screen overflow-hidden items-center justify-center" style="background: #edf2f7;">
 <div class="h-screen bg-gray-100 flex">
     <div class="bg-white w-64 p-5 shadow-lg">
-        <div class="flex items-center space-x-3 mb-5">
-            <img src="{% static 'images/logo.png' %}" alt="Logo" class="h-8 w-8">
-            <div class="font-bold text-xl">ASD Mini</div>
-        </div>
+        <a href="{% url 'home' %}">
+            <div class="flex items-center space-x-3 mb-5">
+                <img src="{% static 'images/logo.png' %}" alt="Logo" class="h-8 w-8">
+                <div class="font-bold text-xl">ASD Mini</div>
+            </div>
+        </a>
         <ul class="space-y-2 text-gray-700">
             <li>
                 <a href="{% url 'dashboard' %}" class="flex items-center p-2 rounded hover:bg-gray-200">

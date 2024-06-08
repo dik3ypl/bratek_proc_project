@@ -42,11 +42,12 @@ def run_tests(request, solution):
             execution_time = round(end_time - start_time, 3)
 
             if result in expected_list:
-                results[test_case.id] = {'result': 'Pass', 'execution_time': execution_time}
+                results[test_case.id] = {'result': 'Pass', 'actual_output': result, 'expected_output': expected_list,
+                                         'execution_time': execution_time}
             else:
-                results[test_case.id] = {'result': 'Fail', 'actual_output': result,
+                results[test_case.id] = {'result': 'Fail', 'actual_output': result, 'expected_output': expected_list,
                                          'execution_time': execution_time}
         except Exception as error:
-            results[test_case.id] = {'error': str(error)}
+            results[test_case.id] = {'result': 'Fail', 'error': str(error)}
 
     return results
