@@ -4,19 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e26aeefd-a0ec-42ba-8dbb-a2276dd44066" name="Changes" comment="Complete dashboard.html">
-      <change afterPath="$PROJECT_DIR$/templates/panel/groups/components/group_header.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/panel/groups/group_instructor.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/panel/groups/group_owner.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/panel/groups/group_student.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/forms/group_form.py" beforeDir="false" afterPath="$PROJECT_DIR$/panel/forms/group_form.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/models/group.py" beforeDir="false" afterPath="$PROJECT_DIR$/panel/models/group.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/panel/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/views/group_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/panel/views/group_views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/panel/create_group.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/panel/create_group.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/panel/join_group.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/panel/join_group.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/panel/my_groups.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/panel/my_groups.html" afterDir="false" />
+    <list default="true" id="e26aeefd-a0ec-42ba-8dbb-a2276dd44066" name="Changes" comment="Update mail template">
+      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wait-for-it.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/common/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,7 +164,7 @@
       <workItem from="1717079301595" duration="6607000" />
       <workItem from="1717797176019" duration="14939000" />
       <workItem from="1717970947867" duration="6819000" />
-      <workItem from="1718026707105" duration="18909000" />
+      <workItem from="1718026707105" duration="28814000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Django commit">
       <option name="closed" value="true" />
@@ -262,7 +254,47 @@
       <option name="project" value="LOCAL" />
       <updated>1718045790431</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Group View: 'owner'">
+      <option name="closed" value="true" />
+      <created>1718053099827</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1718053099827</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Group View: rest ranks">
+      <option name="closed" value="true" />
+      <created>1718054352320</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1718054352320</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Fix submit_solution.html">
+      <option name="closed" value="true" />
+      <created>1718055767993</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1718055767993</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Delete 'solutions' directory">
+      <option name="closed" value="true" />
+      <created>1718055790646</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1718055790646</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Update mail template">
+      <option name="closed" value="true" />
+      <created>1718056237705</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1718056237705</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -302,6 +334,11 @@
     <MESSAGE value="Complete submit_solution.html and solution.html" />
     <MESSAGE value="Complete plagiarisms logic" />
     <MESSAGE value="Complete dashboard.html" />
-    <option name="LAST_COMMIT_MESSAGE" value="Complete dashboard.html" />
+    <MESSAGE value="Group View: 'owner'" />
+    <MESSAGE value="Group View: rest ranks" />
+    <MESSAGE value="Fix submit_solution.html" />
+    <MESSAGE value="Delete 'solutions' directory" />
+    <MESSAGE value="Update mail template" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update mail template" />
   </component>
 </project>
