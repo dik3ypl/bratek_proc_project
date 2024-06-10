@@ -1,0 +1,10 @@
+{% extends 'panel/layouts/layout.html' %}
+
+{% block title %}Group{% endblock %}
+
+{% block content %}
+    <div class="container overflow-x-auto overflow-y-auto mx-auto px-4">
+        <h1 class="text-2xl font-bold my-4">Group {{ group.name }} - Student View</h1>
+        {% include 'panel/groups/components/group_header.html' %}
+    </div>
+{% endblock %}

@@ -82,7 +82,6 @@ def update_task(request, task_id):
 
     if request.method == 'POST':
         task_form = TaskForm(request.POST, instance=task)
-        print(task_form.errors)
         if task_form.is_valid():
             task_form.save()
             messages.info(request, "Task updated successfully.")

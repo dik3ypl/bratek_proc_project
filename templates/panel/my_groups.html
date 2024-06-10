@@ -46,7 +46,7 @@
         <div class="grid grid-cols-4 gap-4">
             {% for item in groups_with_roles %}
                 <div class="cursor-pointer">
-                    <a href="#">
+                    <a href="{% url 'view_group' item.group.id %}">
                         <div class="bg-white shadow-lg rounded-lg">
                             {% if item.group.image %}
                                 <img src="{{ item.group.image.url }}" alt="{{ item.group.name }}"

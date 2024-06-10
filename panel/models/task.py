@@ -5,7 +5,7 @@ from .group import Group
 
 class Task(models.Model):
     title = models.CharField(max_length=128)
-    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name='tasks')
     function_name = models.CharField(max_length=128)
     function_starter = models.TextField(null=True, blank=True)
     description = models.TextField()

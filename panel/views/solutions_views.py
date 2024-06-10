@@ -24,7 +24,6 @@ def show_solution(request, solution_id):
     task = solution.task
     with open(solution.solution_file.path, 'r') as file:
         solution_code = file.read()
-    # test_results = json.loads(solution.test_results)
 
     return render(request, 'panel/solution.html', {
         'solution': solution,
@@ -55,13 +54,6 @@ def submit_solution(request, task_id):
     task = Task.objects.get(id=task_id)
     user = request.user
 
-    if task.end_date and task.end_date < timezone.now():
-        messages.error(request, "You can no longer submit a solution for this task..")
-        return redirect('dashboard')
-    if task.max_attempts and Solution.objects.filter(user=user, task=task).count() >= task.max_attempts:
-        messages.error(request, "You can no longer submit a solution for this task..")
-        return redirect('dashboard')
-
     if task.group.creator == user:
         user_role = 'OWNER'
     else:
@@ -80,6 +72,13 @@ def submit_solution(request, task_id):
         default_code = task.function_starter
 
     if request.method == 'POST':
+        if task.end_date and task.end_date < timezone.now():
+            messages.error(request, "You can no longer submit a solution for this task..")
+            return redirect('dashboard')
+        if task.max_attempts and Solution.objects.filter(user=user, task=task).count() >= task.max_attempts:
+            messages.error(request, "You can no longer submit a solution for this task..")
+            return redirect('dashboard')
+
         form = SolutionForm(request.POST, request.FILES)
         if form.is_valid():
             solution_type = form.cleaned_data['solution_type']

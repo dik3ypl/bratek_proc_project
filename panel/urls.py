@@ -10,6 +10,15 @@ urlpatterns = [
     path('groups/mine', group_views.my_groups, name='my_groups'),
 
     path('groups/<int:group_id>', group_views.view_group, name='view_group'),
+    path('groups/<int:group_id>/update', group_views.update, name='update_group'),
+    path('groups/<int:group_id>/delete', group_views.delete, name='delete_group'),
+    path('group/<int:group_id>/delete-image/', group_views.delete_group_image, name='delete_group_image'),
+    path('group/<int:group_id>/create-task/', group_views.create_group_task, name='create_task'),
+    path('group/<int:task_id>/delete-task/', group_views.delete_group_task, name='delete_task'),
+    path('group/<int:group_id>/create-message/', group_views.create_group_message, name='create_group_message'),
+    path('group/<int:message_id>/delete-message/', group_views.delete_group_message, name='delete_group_message'),
+    path('group/<int:group_id>/delete-group-member/<int:user_id>', group_views.delete_group_member,
+         name='delete_group_member'),
 
     path('join-group/', group_views.join_group, name='join_group'),
     path('join-group-as-student/', group_views.join_group_as_student, name='join_group_as_student'),
