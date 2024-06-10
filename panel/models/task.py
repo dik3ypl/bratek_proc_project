@@ -12,6 +12,8 @@ class Task(models.Model):
     max_attempts = models.IntegerField(null=True, blank=True)
     end_date = models.DateTimeField(null=True, blank=True)
     max_points = models.IntegerField(default=10)
+    is_plagiarism_checked = models.BooleanField(default=False)
+    is_solutions_changed = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title

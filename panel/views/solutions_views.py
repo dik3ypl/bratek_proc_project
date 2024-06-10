@@ -104,6 +104,10 @@ def submit_solution(request, task_id):
             solution.test_results = results
             solution.save()
 
+            # Show notification in plagiarism page
+            task.is_solutions_changed = True
+            task.save()
+
             return redirect('submit_solution', task_id=solution.task.id)
     else:
         form = SolutionForm(initial={'task': task_id, 'user': request.user, 'python_code': default_code})

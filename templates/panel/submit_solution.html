@@ -368,6 +368,22 @@
 
         <div class="mb-6 bg-white shadow-md rounded px-8 pt-6 pb-8 overflow-x-auto">
             <h2 class="text-lg font-bold mb-2">Ranking</h2>
+            <div class="flex justify-between items-center mb-4">
+                {% if user_role != 'STUDENT' %}
+                    <div class="flex justify-end w-full">
+                        <a href="{% url 'check_plagiarism' task.id %}"
+                           class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2">
+                            Check Plagiarism
+                        </a>
+                        {% if task.is_plagiarism_checked %}
+                            <a href="{% url 'show_plagiarism' task.id %}"
+                               class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                                Show Plagiarism
+                            </a>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
             <table class="min-w-full bg-white">
                 <thead>
                 <tr>

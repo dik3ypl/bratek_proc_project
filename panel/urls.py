@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import dashboard_views, task_views, solutions_views, group_views
+from .views import dashboard_views, task_views, solutions_views, group_views, plagiarism_views
 
 urlpatterns = [
     path('', dashboard_views.dashboard, name='dashboard'),
@@ -22,4 +22,6 @@ urlpatterns = [
     path('add-test-case/<int:task_id>/', task_views.add_test_case, name='add_test_case'),
     path('delete-test-case/<int:test_case_id>/', task_views.delete_test_case, name='delete_test_case'),
 
+    path('check-plagiarism/<int:task_id>/', plagiarism_views.check_plagiarism, name='check_plagiarism'),
+    path('show-plagiarism/<int:task_id>/', plagiarism_views.show_plagiarism, name='show_plagiarism'),
 ]
