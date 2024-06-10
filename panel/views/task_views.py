@@ -1,7 +1,11 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.utils import timezone
-from ..models import Task, Solution, Group, GroupMembership
+
+from ..forms.task_form import TaskForm
+from ..forms.text_case_form import TestCaseForm
+from ..models import Task, Solution, Group, GroupMembership, TestCase
 
 
 @login_required
@@ -70,3 +74,43 @@ def view_tasks(request):
         'role_filter': role_filter,
         'is_active_filter': is_active_filter
     })
+
+
+@login_required
+def update_task(request, task_id):
+    task = Task.objects.get(id=task_id)
+
+    if request.method == 'POST':
+        task_form = TaskForm(request.POST, instance=task)
+        print(task_form.errors)
+        if task_form.is_valid():
+            task_form.save()
+            messages.info(request, "Task updated successfully.")
+        else:
+            messages.error(request, "Error updating task.")
+    return redirect('submit_solution', task_id=task_id)
+
+
+@login_required
+def add_test_case(request, task_id):
+    task = Task.objects.get(id=task_id)
+
+    if request.method == 'POST':
+        test_case_form = TestCaseForm(request.POST)
+        if test_case_form.is_valid():
+            new_test_case = test_case_form.save(commit=False)
+            new_test_case.task = task
+            new_test_case.save()
+            messages.info(request, "Test case added successfully.")
+        else:
+            messages.error(request, "Error adding test case.")
+    return redirect('submit_solution', task_id=task_id)
+
+
+@login_required
+def delete_test_case(request, test_case_id):
+    test_case = TestCase.objects.get(id=test_case_id)
+    task_id = test_case.task.id
+    test_case.delete()
+    messages.info(request, "Test case deleted successfully.")
+    return redirect('submit_solution', task_id=task_id)

@@ -4,12 +4,50 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.conf import settings
 from django.utils import timezone
+from django.views.decorators.http import require_http_methods
 
 from ..forms import SolutionForm
 from django.contrib.auth.decorators import login_required
+
+from ..forms.task_form import TaskForm
+from ..forms.text_case_form import TestCaseForm
 from ..functions import run_tests, count_stats, count_table
-from ..models import Solution, Task, GroupMembership
+from ..models import Solution, Task, GroupMembership, TestCase
 import os
+import json
+
+
+@login_required
+def show_solution(request, solution_id):
+    solution = Solution.objects.get(id=solution_id)
+    user = solution.user
+    task = solution.task
+    with open(solution.solution_file.path, 'r') as file:
+        solution_code = file.read()
+    # test_results = json.loads(solution.test_results)
+
+    return render(request, 'panel/solution.html', {
+        'solution': solution,
+        'user': user,
+        'task': task,
+        'solution_code': solution_code,
+        'test_results': solution.test_results
+    })
+
+
+@login_required
+@require_http_methods(["POST"])
+def update_points(request, solution_id):
+    points = request.POST.get('points')
+    solution = Solution.objects.get(id=solution_id)
+    points = int(points)
+    if points <= solution.task.max_points:
+        solution.points = points
+        solution.save()
+        messages.success(request, 'Points updated successfully.')
+    else:
+        messages.error(request, f'Points cannot exceed the maximum of {solution.task.max_points}.')
+    return redirect('submit_solution', task_id=solution.task.id)
 
 
 @login_required
@@ -74,9 +112,15 @@ def submit_solution(request, task_id):
     stats = count_stats(previous_solutions)
     ranking_table = count_table(task)
 
+    task_form = TaskForm(instance=task)
+    test_case_form = TestCaseForm()
+
     return render(request, 'panel/submit_solution.html', {
         'task': task,
         'form': form,
+        'task_form': task_form,
+        'test_case_form': test_case_form,
+        'test_cases': TestCase.objects.filter(task_id=task_id),
         'task_id': task_id,
         'previous_solutions': previous_solutions,
         'user': user,

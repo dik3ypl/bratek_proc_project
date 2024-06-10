@@ -39,8 +39,9 @@ def count_table(task):
     for solution in all_solutions:
         user = solution.user
         if user not in user_stats:
-            user_stats[user] = {'user_mail': user.email, 'username': user.username, 'tests_passed': 0, 'tests': 0,
-                                'total_time': 0.0}
+            user_stats[user] = {
+                'solution_id': solution.id, 'user_mail': user.email, 'username': user.username, 'tests_passed': 0,
+                'tests': 0, 'total_time': 0.0, 'points': solution.points}
 
             for test_result in solution.test_results.values():
                 user_stats[user]['tests'] += 1

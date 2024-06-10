@@ -5,21 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e26aeefd-a0ec-42ba-8dbb-a2276dd44066" name="Changes" comment="Update group joining and list groups">
-      <change afterPath="$PROJECT_DIR$/panel/functions/stats.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/panel/forms/task_form.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/panel/forms/text_case_form.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/panel/solution.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/forms/solution_form.py" beforeDir="false" afterPath="$PROJECT_DIR$/panel/forms/solution_form.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/functions/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/panel/functions/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/functions/testing_function.py" beforeDir="false" afterPath="$PROJECT_DIR$/panel/functions/testing_function.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/panel/models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/panel/functions/stats.py" beforeDir="false" afterPath="$PROJECT_DIR$/panel/functions/stats.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/panel/models/solution.py" beforeDir="false" afterPath="$PROJECT_DIR$/panel/models/solution.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/panel/models/task.py" beforeDir="false" afterPath="$PROJECT_DIR$/panel/models/task.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/panel/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/panel/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/panel/views/solutions_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/panel/views/solutions_views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/panel/views/task_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/panel/views/task_views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/layouts/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/layouts/layout.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/panel/layouts/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/panel/layouts/layout.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/panel/my_groups.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/panel/my_groups.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/panel/submit_solution.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/panel/submit_solution.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/panel/view_tasks.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/panel/view_tasks.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,35 +73,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Django Server.bratek_proc_project.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;django.template.preview.state&quot;: &quot;SHOW_EDITOR_AND_PREVIEW&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/AGH/bratek_proc_project/panel/forms&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.intellij.pycharm.community.ide.impl.configuration.PythonContentEntriesConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Django Server.bratek_proc_project.executor": "Run",
+    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "django.template.preview.state": "SHOW_EDITOR_AND_PREVIEW",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/AGH/bratek_proc_project/templates/panel",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.intellij.pycharm.community.ide.impl.configuration.PythonContentEntriesConfigurable",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\AGH\bratek_proc_project\panel\forms" />
       <recent name="C:\AGH\bratek_proc_project\templates\panel" />
+      <recent name="C:\AGH\bratek_proc_project\panel\forms" />
       <recent name="C:\AGH\bratek_proc_project\solutions" />
       <recent name="C:\AGH\bratek_proc_project\tmp" />
       <recent name="C:\AGH\bratek_proc_project\app\enums" />
@@ -174,6 +170,7 @@
       <workItem from="1716936308141" duration="28000" />
       <workItem from="1717079301595" duration="6607000" />
       <workItem from="1717797176019" duration="14939000" />
+      <workItem from="1717970947867" duration="6369000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Django commit">
       <option name="closed" value="true" />

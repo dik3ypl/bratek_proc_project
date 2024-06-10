@@ -10,6 +10,7 @@ class Solution(models.Model):
     solution_file = models.FileField(upload_to='solutions/', null=True, blank=True)
     test_results = models.JSONField(null=True, blank=True)
     tests_passed = models.BooleanField(default=False)
+    points = models.IntegerField(default=0)
     submitted_at = models.DateTimeField(default=now, blank=True)
 
     def __str__(self):
