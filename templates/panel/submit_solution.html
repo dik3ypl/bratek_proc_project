@@ -200,6 +200,9 @@
                     editor.setTheme("ace/theme/monokai");
                     editor.session.setMode("ace/mode/python");
                     editor.setValue(document.getElementById('pythonTextarea').value, -1);
+                    editor.session.on('change', function () {
+                        document.getElementById('pythonTextarea').value = editor.getValue();
+                    });
                 });
             </script>
         {% else %}
