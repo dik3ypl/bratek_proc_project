@@ -4,19 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e26aeefd-a0ec-42ba-8dbb-a2276dd44066" name="Changes" comment="Complete submit_solution.html and solution.html">
-      <change afterPath="$PROJECT_DIR$/panel/functions/calculating_plagiarism.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/panel/models/plagiarism.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/panel/views/plagiarism_views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/panel/view_plagiarisms.html" afterDir="false" />
+    <list default="true" id="e26aeefd-a0ec-42ba-8dbb-a2276dd44066" name="Changes" comment="Complete plagiarisms logic">
+      <change afterPath="$PROJECT_DIR$/panel/forms/user_form.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/panel/views/account_settings_views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/user_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/panel/account_settings.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/functions/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/panel/functions/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/panel/models/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/models/task.py" beforeDir="false" afterPath="$PROJECT_DIR$/panel/models/task.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/controllers/auth_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/controllers/auth_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/panel/forms/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/panel/forms/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/panel/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/panel/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/panel/views/dashboard_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/panel/views/dashboard_views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/panel/views/group_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/panel/views/group_views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/panel/views/solutions_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/panel/views/solutions_views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/panel/submit_solution.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/panel/submit_solution.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/panel/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/panel/dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/panel/layouts/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/panel/layouts/layout.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,11 +109,11 @@
       <recent name="C:\AGH\bratek_proc_project\app\enums" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\AGH\bratek_proc_project\static\images" />
       <recent name="C:\AGH\PWJP\bratek_proc_project\templates\main" />
       <recent name="C:\AGH\PWJP\bratek_proc_project\static\images" />
       <recent name="C:\AGH\PWJP\bratek_proc_project\static" />
       <recent name="C:\AGH\PWJP\bratek_proc_project\templates" />
-      <recent name="C:\AGH\PWJP\bratek_proc_project" />
     </key>
   </component>
   <component name="RunManager">
@@ -172,7 +173,7 @@
       <workItem from="1717079301595" duration="6607000" />
       <workItem from="1717797176019" duration="14939000" />
       <workItem from="1717970947867" duration="6819000" />
-      <workItem from="1718026707105" duration="9308000" />
+      <workItem from="1718026707105" duration="16617000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Django commit">
       <option name="closed" value="true" />
@@ -246,7 +247,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717977742504</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Complete plagiarisms logic">
+      <option name="closed" value="true" />
+      <created>1718038352687</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1718038352687</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -284,6 +293,7 @@
     <MESSAGE value="Simple fixes" />
     <MESSAGE value="Update group joining and list groups" />
     <MESSAGE value="Complete submit_solution.html and solution.html" />
-    <option name="LAST_COMMIT_MESSAGE" value="Complete submit_solution.html and solution.html" />
+    <MESSAGE value="Complete plagiarisms logic" />
+    <option name="LAST_COMMIT_MESSAGE" value="Complete plagiarisms logic" />
   </component>
 </project>

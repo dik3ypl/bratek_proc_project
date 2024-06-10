@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods
@@ -13,12 +14,17 @@ from panel.models.group import GroupMembership
 
 
 @login_required
+def view_group(request, group_id):
+    return HttpResponse("xxx")
+
+
+@login_required
 def create(request):
     form = GroupForm()
     if request.method == 'POST':
         new_group = group_controller.create_group(request.POST, request.user, request.FILES)
         if new_group:
-            messages.success(request, 'New group created')
+            messages.info(request, 'New group created')
             return redirect('dashboard')
 
         messages.error(request, 'Cannot create a new group')
@@ -43,7 +49,7 @@ def join_group_as_student(request):
         group = Group.objects.filter(join_code=join_code).first()
         if group and request.user is not group.creator:
             GroupMembership.objects.create(group=group, user=request.user, role=Role.STUDENT)
-            messages.success(request, 'You have successfully joined the group as a student')
+            messages.info(request, 'You have successfully joined the group as a student')
             return redirect('dashboard')
         else:
             messages.error(request, 'Invalid join code for student')
@@ -61,7 +67,7 @@ def join_group_as_instructor(request):
         group = Group.objects.filter(join_code_for_instructor=join_code).first()
         if group is not group.creator:
             GroupMembership.objects.create(group=group, user=request.user, role=Role.INSTRUCTOR)
-            messages.success(request, 'You have successfully joined the group as an instructor')
+            messages.info(request, 'You have successfully joined the group as an instructor')
             return redirect('dashboard')
         else:
             messages.error(request, 'Invalid join code for instructor')

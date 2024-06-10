@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import dashboard_views, task_views, solutions_views, group_views, plagiarism_views
+from .views import dashboard_views, task_views, solutions_views, group_views, plagiarism_views, account_settings_views
 
 urlpatterns = [
     path('', dashboard_views.dashboard, name='dashboard'),
@@ -8,6 +8,8 @@ urlpatterns = [
     path('group/create', group_views.create, name='group_create'),
 
     path('groups/mine', group_views.my_groups, name='my_groups'),
+
+    path('groups/<int:group_id>', group_views.view_group, name='view_group'),
 
     path('join-group/', group_views.join_group, name='join_group'),
     path('join-group-as-student/', group_views.join_group_as_student, name='join_group_as_student'),
@@ -24,4 +26,8 @@ urlpatterns = [
 
     path('check-plagiarism/<int:task_id>/', plagiarism_views.check_plagiarism, name='check_plagiarism'),
     path('show-plagiarism/<int:task_id>/', plagiarism_views.show_plagiarism, name='show_plagiarism'),
+
+    path('account-settings/', account_settings_views.account_settings, name='account_settings'),
+    path('account-settings/update-email/', account_settings_views.update_email, name='update_email'),
+    path('account-settings/update-password/', account_settings_views.update_password, name='update_password'),
 ]

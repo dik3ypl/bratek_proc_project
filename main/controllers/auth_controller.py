@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.utils.encoding import force_str
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.tokens import default_token_generator
@@ -24,7 +24,6 @@ def register(request):
         messages.info(request, 'Check your email to activate your account')
         return redirect('home')
     else:
-        print(form.errors)
         messages.error(request, 'Invalid data provided. Please try again')
         return redirect('register')
 
@@ -36,13 +35,21 @@ def login_user(request):
         messages.error(request, 'Invalid credentials')
         return redirect('login')
 
-    user = authenticate(request, username=form.cleaned_data['username'], password=form.cleaned_data['password'])
+    username_or_email = form.cleaned_data['username']
+    password = form.cleaned_data['password']
+
+    user = authenticate(request, username=username_or_email, password=password)
+
+    # Login via e-mail
+    if user is None:
+        user_queryset = User.objects.filter(email=username_or_email)
+        if user_queryset.exists():
+            user_obj = user_queryset.first()
+            user = authenticate(request, username=user_obj.username, password=password)
 
     if user is None:
-        user = authenticate(request, email=form.cleaned_data['username'], password=form.cleaned_data['password'])
-        if user is None:
-            messages.error(request, 'Invalid credentials')
-            return redirect('login')
+        messages.error(request, 'Invalid credentials')
+        return redirect('login')
 
     if user.is_active:
         login(request, user)

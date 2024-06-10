@@ -44,7 +44,7 @@ def update_points(request, solution_id):
     if points <= solution.task.max_points:
         solution.points = points
         solution.save()
-        messages.success(request, 'Points updated successfully.')
+        messages.info(request, 'Points updated successfully.')
     else:
         messages.error(request, f'Points cannot exceed the maximum of {solution.task.max_points}.')
     return redirect('submit_solution', task_id=solution.task.id)
