@@ -178,6 +178,19 @@ def join_group_as_student(request):
 
 @login_required
 @require_http_methods(["POST"])
+def quit_group(request, group_id):
+    user = request.user
+    group = Group.objects.get(pk=group_id)
+
+    membership = GroupMembership.objects.filter(group=group, user=user).first()
+    membership.delete()
+    messages.info(request, 'You have successfully quit the group.')
+
+    return redirect('dashboard')
+
+
+@login_required
+@require_http_methods(["POST"])
 def join_group_as_instructor(request):
     form = JoinGroupAsInstructorForm(request.POST)
     if form.is_valid():

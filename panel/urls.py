@@ -13,6 +13,7 @@ urlpatterns = [
     path('groups/<int:group_id>/update', group_views.update, name='update_group'),
     path('groups/<int:group_id>/delete', group_views.delete, name='delete_group'),
     path('group/<int:group_id>/delete-image/', group_views.delete_group_image, name='delete_group_image'),
+    path('quit-group/<int:group_id>/', group_views.quit_group, name='quit_group'),
     path('group/<int:group_id>/create-task/', group_views.create_group_task, name='create_task'),
     path('group/<int:task_id>/delete-task/', group_views.delete_group_task, name='delete_task'),
     path('group/<int:group_id>/create-message/', group_views.create_group_message, name='create_group_message'),
