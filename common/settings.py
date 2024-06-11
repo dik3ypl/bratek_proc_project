@@ -72,14 +72,25 @@ WSGI_APPLICATION = 'common.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': os.getenv('DB_NAME', 'app_db'),
+#         'USER': os.getenv('DB_USER', 'app_user'),
+#         'PASSWORD': os.getenv('DB_PASSWORD', 'app_password'),
+#         'HOST': os.getenv('DB_HOST', 'db'),
+#         'PORT': os.getenv('DB_PORT', '3306'),
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('DB_NAME', 'app_db'),
-        'USER': os.getenv('DB_USER', 'app_user'),
-        'PASSWORD': os.getenv('DB_PASSWORD', 'app_password'),
-        'HOST': os.getenv('DB_HOST', 'db'),
-        'PORT': os.getenv('DB_PORT', '3306'),
+        'NAME': 'django_project',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
