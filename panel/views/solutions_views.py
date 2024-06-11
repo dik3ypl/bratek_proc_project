@@ -87,7 +87,6 @@ def submit_solution(request, task_id):
                 filename = f'solutions/{uuid.uuid1()}.py'
                 file_path = os.path.join(settings.MEDIA_ROOT, filename)
 
-                print(python_code)
                 with open(file_path, 'w') as file:
                     file.write(python_code)
 
